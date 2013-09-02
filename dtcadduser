@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "New Username:"
+read navn
+sudo useradd -d /home/$navn -m $navn
+sudo passwd $navn
