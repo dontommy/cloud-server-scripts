@@ -1,0 +1,25 @@
+#!/bin/bash
+sudo echo "# IPv6
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+sudo sysctl -p
+sudo apt-get update
+sudo apt-get install apache2
+sudo apt-get install php5 libapache2-mod-php5 php5-curl php5-imap libssh2-php
+
+sudo /etc/init.d/apache2 restart
+
+sudo apt-get install mysql-server
+sudo apt-get install libapache2-mod-auth-mysql php5-mysql phpmyadmin
+
+sudo sed -i.bak s/';   extension=msql.so'/'extension=msql.so'/g /etc/php5/apach$
+sudo /etc/init.d/apache2 restart
+sudo apt-get install bind9 dnsutils
+sudo add-apt-repository ppa:thefrontiergroup/vsftpd
+sudo apt-get update
+sudo apt-get install vsftpd
+sudo sed -i 's/chroot_local_user=NO/chroot_local_user=YES/g' /etc/vsftpd.conf
+sudo sed -i 's/#local_enable=YES/local_enable=YES/g' /etc/vsftpd.conf
+sudo sh -c "echo 'allow_writeable_chroot=YES' >> /etc/vsftpd.conf"
+sudo service vsftpd restart
