@@ -1,0 +1,22 @@
+#!/bin/bash
+echo "Enter Username:"
+read username
+echo "Enter Domain Name:"
+read domainname
+echo "Enter Subdomain Name:"
+read sub
+echo "Enter IP:"
+read ip
+fulld=$sub"."$domainname
+sudo mkdir /home/$username/$domainname/subdomains/$sub
+sudo cp /etc/apache2/sites-available/sub-template.com /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo cp /home/ubuntu/scripts/htaccesstemplate /home/$username/$domainname/subdomains/$sub/.htaccess
+sudo sed -i 's/DOMAINNAME/'$fulld'/g' /home/$username/$domainname/subdomains/$sub/.htaccess
+sudo sed -i 's/FUCKIP/'$ip'/g' /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo sed -i 's/FULLNAME/'$fulld'/g' /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo sed -i 's/FUCKDOMAIN/'$domainname'/g' /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo sed -i 's/FUCKSUB/'$sub'/g' /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo sed -i 's/FUCKUSER/'$username'/g' /etc/apache2/sites-available/0002-$domainname"-"$sub
+sudo a2ensite 0002-$domainname"-"$sub
+sudo service apache2 reload
+sudo chown $username:$username /home/$username/$domainname/subdomains/$sub
