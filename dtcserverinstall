@@ -13,7 +13,7 @@ sudo /etc/init.d/apache2 restart
 sudo apt-get install mysql-server
 sudo apt-get install libapache2-mod-auth-mysql php5-mysql phpmyadmin
 
-sudo sed -i.bak s/';   extension=msql.so'/'extension=msql.so'/g /etc/php5/apach$
+sudo sed -i.bak s/';   extension=msql.so'/'extension=msql.so'/g /etc/php5/apache/php.ini
 sudo /etc/init.d/apache2 restart
 sudo apt-get install bind9 dnsutils
 sudo add-apt-repository ppa:thefrontiergroup/vsftpd
