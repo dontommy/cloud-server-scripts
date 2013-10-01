@@ -9,9 +9,11 @@ sudo mkdir /home/$username/$domainname
 sudo mkdir /home/$username/$domainname/subdomains
 sudo cp /etc/apache2/sites-available/template.com /etc/apache2/sites-available/0001-$domainname
 sudo cp /home/ubuntu/scripts/htaccesstemplate /home/$username/$domainname/.htaccess
+
 sudo sed -i 's/DOMAINNAME/'$domainname'/g' /home/$username/$domainname/.htaccess
+
 sudo sed -i 's/FUCKIP/'$ip'/g' /etc/apache2/sites-available/0001-$domainname
-sudo sed -i 's/FUCKDOMAIN/'$domainname'/g' /etc/apache2/sites-available/0001-$domainname
+sudo sed -i 's/DOMAINNAME/'$domainname'/g' /etc/apache2/sites-available/0001-$domainname
 sudo sed -i 's/FUCKUSER/'$username'/g' /etc/apache2/sites-available/0001-$domainname
 sudo a2ensite 0001-$domainname
 sudo service apache2 reload
