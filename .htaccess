@@ -1,0 +1,10 @@
+ErrorDocument 400 /
+ErrorDocument 401 /
+ErrorDocument 403 /
+ErrorDocument 404 /
+ErrorDocument 500 /
+RewriteEngine ON
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} !^DOMAINNAME$ [NC]
+RewriteRule ^(.*)$ http://DOMAINNAME/$1 [L,R=301]
